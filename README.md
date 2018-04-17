@@ -1,5 +1,5 @@
 # 0 Intro
-This is a Mask-RCNN-based solution to the 
+This is a Mask-RCNN-based solution to the [Kaggle 2018 Data Science Bowl](https://www.kaggle.com/c/data-science-bowl-2018)
 
 # 1 Hardware requirements
 
