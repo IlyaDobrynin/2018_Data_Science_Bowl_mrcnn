@@ -1,13 +1,10 @@
 import os
 import numpy as np
 import skimage.io
-import matplotlib.pyplot as plt
 import skimage.segmentation
 from dirs import ROOT_DIR, TRAIN_DATASET_DIR
 from tqdm import tqdm
-from src.utils import data_exploration as de
 
-# DATASET_DIR = os.path.join(ROOT_DIR, r'data/fixed_images/train')
 
 def calculate_image_iou(image_id, true_images_dir, pred_images_dir):
     # Load a single image and its associated masks
