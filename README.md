@@ -4,6 +4,10 @@ This is a Mask-RCNN-based solution to the [Kaggle 2018 Data Science Bowl](https:
 * Stage 2 private score 0.569 — 34th place
 
 # 1 Hardware requirements
+My specs:
+* Intel i5-4690
+* Nvidia GeForce 970
+Training time — ~900s per epoch
 
 # 2 Preparing the data
 1. Clone 
