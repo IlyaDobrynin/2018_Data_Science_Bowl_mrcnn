@@ -3,8 +3,8 @@ import os
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Dataset folder
-TRAIN_DATASET_DIR = os.path.join(ROOT_DIR, r'data/internal_external/train')  # Change for your path
-TEST_DATASET_DIR = os.path.join(ROOT_DIR, r'data/test')  # Change for your path
+TRAIN_DATASET_DIR = r'C:/Programming/nuclei/data/train'  # Change for your path
+TEST_DATASET_DIR = r'C:/Programming/nuclei/data/test'  # Change for your path
 
 # Path to save files
 OUT_FILES = ROOT_DIR # r'C:/Programming/nuclei'  # os.path.join(ROOT_DIR, r"out_files")  # Change for your files
