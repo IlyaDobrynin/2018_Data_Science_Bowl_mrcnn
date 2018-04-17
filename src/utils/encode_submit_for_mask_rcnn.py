@@ -1,6 +1,5 @@
 import os
 import numpy as np
-import sys
 from tqdm import tqdm
 import pandas as pd
 from skimage.io import imread
@@ -59,6 +58,7 @@ def create_submit(files_path, model_name, submit_path):
     sub['ImageId'] = new_test_ids
     sub['EncodedPixels'] = pd.Series(rles).apply(lambda x: ' '.join(str(y) for y in x))
     sub.to_csv(os.path.join(submit_path, r'{}_sub.csv'.format(model_name)), index=False)
+
 
 if __name__ == '__main__':
     print('-' * 30 + ' Creating submit file... ' + '-' * 30)
