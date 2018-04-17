@@ -311,11 +311,11 @@ if __name__ == "__main__":
         'model_type': 'mrcnn',
 
         # TRAINING PARAMETERS
-        'init_with': 'path',  # "imagenet", "coco", "last" or "path". If "path" is chosen,
+        'init_with': 'coco',  # "imagenet", "coco", "last" or "path". If "path" is chosen,
                               # get the path from 'path_to_weights_for_train'.
         'path_to_weights_for_train': r'weights/cell20180412T2356/mask_rcnn_cell_0060.h5',
-        'learning_pipeline': {'heads': 0,
-                              '4+': 100
+        'learning_pipeline': {'heads': 40,
+                              '4+': 80
                               },
                               #'4+': 100},
         'train_dataset': 'ie',  # i - internal train dataset,
@@ -324,7 +324,7 @@ if __name__ == "__main__":
         'val_split': 0.1,
 
         # PREDICT PARAMETERS
-        'epoch_for_predict': '58',  # int, "last" or "path". If "path" is chosen,
+        'epoch_for_predict': 'last',  # int, "last" or "path". If "path" is chosen,
                                       # get the path from 'path_to_weights_for_predict'.
         'path_to_weights_for_predict': r'weights/cell20180411T1546/mask_rcnn_cell_0045.h5'
     }
