@@ -5,7 +5,9 @@ This is a Mask-RCNN-based solution to the
 
 # 2 Preparing the data
 1. Clone the repository 
+
    ```git clone https://github.com/IlyaDobrynin/2018_Data_Science_Bowl_mrcnn.git```
+   
 1. Put train dataset into "data/internal_external/train" folder
 2. Put test dataset into "data/test" folder
 3. Put pretrained coco weights into "src/nn_var/mask_rcnn/coco_model"
