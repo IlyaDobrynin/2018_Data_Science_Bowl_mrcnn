@@ -1,5 +1,7 @@
 # 0 Intro
 This is a Mask-RCNN-based solution to the [Kaggle 2018 Data Science Bowl](https://www.kaggle.com/c/data-science-bowl-2018)
+* Stage 1 public score ~0.490
+* Stage 2 private score 0.569 — 34th place
 
 # 1 Hardware requirements
 
