@@ -56,7 +56,7 @@ Training time ~900s per epoch with pre-defined parameters
 ```               
 ## 2.2 Pretrained weights
 1. For the model training process you will need the COCO pretrained weights. You can download them [**here**](https://yadi.sk/d/WBcgk3yA3UWzkt)
-2. The model weights from the 34 place of the competition are [**here**](https://yadi.sk/d/O6FNJ0cd3UX4Pp)
+2. The model weights from the 34 place of the competition are [**here**](https://yadi.sk/d/O6FNJ0cd3UX4Pp). You should put them into **weights** folder.
 
 # 3 Training
 1. Change paths in **dirs.py** such as:
