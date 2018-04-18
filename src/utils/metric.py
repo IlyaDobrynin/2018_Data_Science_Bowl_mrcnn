@@ -56,7 +56,7 @@ def calculate_image_iou(image_id, true_images_dir, pred_images_dir):
 if __name__ == "__main__":
 
     # For standalone metric calculation change postproc_images_dir to your path to data
-    postproc_images_dir = r'out_files/images/postproc_val/remove_small_obj/cell20180411T1546-path_ep-13_pep'
+    postproc_images_dir = r'out_files/images/predict_val/cell20180412T2356-080_ep-60_pep'
 
 
     postproc_images_ids = next(os.walk(os.path.join(ROOT_DIR, postproc_images_dir)))[1]
