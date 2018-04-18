@@ -16,18 +16,51 @@ Training time ~900s per epoch with pre-defined parameters
 
 # 2 Preparing the data
 1. Clone this repo:
-      `git clone https://github.com/snakers4/ds_bowl_2018'
-1. Put train dataset into "data/internal_external/train" folder
-2. Put test dataset into "data/test" folder
-3. Put pretrained coco weights into "src/nn_var/mask_rcnn/coco_model"
-4. Change paths in dirs.py
-5. Train the model: run "src/nn_var/mask_rcnn/train.py" file with params['mode'] = 'training'.
-   Set your parameters in params dictionary.
-6. Predict: run "src/nn_var/mask_rcnn/train.py" file with params['mode'] = 'predict'
+      `git clone https://github.com/snakers4/ds_bowl_2018`
+2. Dataset.
+      * Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data)
+      * Download official external dataset from [this page](https://www.kaggle.com/voglinio/bowl2018-external)
+      * Change path in **dirs.py** to your external dataset folder, then run **src/utils/ext_data_preprocessing.py** to split external images from 1000x1000 px to 500x500 px
+      * Make train dataset - put all files from **external_data_splited** to **stage1_train**
+      * At the end of steps above you shout get similar structure:
+ ``` 
+    └─ data
+         ├── stage1_test                 <- A folder with stage1 test data
+         ├── stage2_test                 <- A folder with stage2 test data
+         ├── stage1_train                <- A folder with stage1 train data
+         │     ├─ 00ae65c1c6631ae6f2be1a449902976e6eb8483bf6b0740d00530220832c6d3e
+         │     │    ├──  images
+         │     │    └──  masks
+         │     .
+         │     .
+         │     .
+         │     └─ TCGA-RD-A8N9-01A-01-TS1-4
+         ├── external_data
+         │     ├─ TCGA-18-5592-01Z-00-DX1
+         │     │   ├──  images
+         │     │   └──  masks
+         │     .
+         │     .
+         │     .
+         │     └─ TCGA-RD-A8N9-01A-01-TS1
+         └── external_data_splited
+               ├─ TCGA-18-5592-01Z-00-DX1-1
+               │   ├──  images
+               │   └──  masks
+               .
+               .
+               .
+               └─ TCGA-RD-A8N9-01A-01-TS1-4
+```               
+      
+
+4. Change paths in **dirs.py** such as:
 
 # 3 Training
 
 # 4 Validation
 
 # 5 Predict and Submit
+
+    d
 
