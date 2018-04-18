@@ -1,5 +1,5 @@
 import os
-import numpy as np # linear algebra
+import numpy as np
 import skimage.io
 import matplotlib.pyplot as plt
 import random
