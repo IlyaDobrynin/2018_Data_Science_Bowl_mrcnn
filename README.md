@@ -93,5 +93,5 @@ Validation allow you locally predict the mean IoU score, achieved with trained m
 # 5 Predict and Submit
 1. Set `params['mode'] = predict`.
 2. Set `params['epoch_for_predict']` just like in the Validation step.
-3. The output submut will be in the **sub** folder.
+3. The output submit will be in the **sub** folder.
 
