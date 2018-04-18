@@ -3,11 +3,12 @@ import os
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Dataset folder
-TRAIN_DATASET_DIR = r'C:/Programming/nuclei/data/train'  # Change for your path
-TEST_DATASET_DIR = r'C:/Programming/nuclei/data/test'  # Change for your path
+TRAIN_DATASET_DIR = r'C:/Programming/nuclei/data/train'   # Change for your path
+TEST_DATASET_DIR = r'C:/Programming/nuclei/data/test'     # Change for your path
+EXTERNAL_DATA = r'C:/Programming/nuclei/data/extra_data'  # Change for your path
 
 # Path to save files
-OUT_FILES = ROOT_DIR # r'C:/Programming/nuclei'  # os.path.join(ROOT_DIR, r"out_files")  # Change for your files
+OUT_FILES = ROOT_DIR                                      # Change for your path
 
 # Path to model weights
 MODEL_DIR = os.path.join(ROOT_DIR, r'weights')
