@@ -16,7 +16,6 @@ Training time ~900s per epoch with pre-defined parameters
 
 # 2 Preparing the data
 1. Clone this repo:
-
       `git clone https://github.com/snakers4/ds_bowl_2018`
 2. Dataset.
       * Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data)
@@ -56,13 +55,12 @@ Training time ~900s per epoch with pre-defined parameters
       
 
 4. Change paths in **dirs.py** such as:
-5. Train the model: run "src/nn_var/mask_rcnn/train.py" file with params['mode'] = 'training'.
-   Set your parameters in params dictionary.
-6. Predict: run "src/nn_var/mask_rcnn/train.py" file with params['mode'] = 'predict'
 
 # 3 Training
 
 # 4 Validation
 
 # 5 Predict and Submit
+
     d
+
