@@ -12,6 +12,7 @@ This is a Mask-RCNN-based solution to the [Kaggle 2018 Data Science Bowl](https:
 My specs:
 * Intel i5-4690
 * Nvidia GeForce 970
+
 Training time ~900s per epoch with pre-defined parameters
 
 # 2 Preparing the data
