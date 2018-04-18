@@ -1,4 +1,8 @@
 from src.nn_var.mask_rcnn.train import *
+from src.utils import data_exploration as de
+import src.nn_var.mask_rcnn.mrcnn.model as modellib
+from dirs import MODEL_DIR
+
 
 params = {
     'mode': 'training',  # "training", "validate" or "predict"
