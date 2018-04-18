@@ -50,11 +50,9 @@ Training time ~900s per epoch with pre-defined parameters
                .
                .
                .
-               └─ TCGA-RD-A8N9-01A-01-TS1-4
-    
-        
+               └─ TCGA-RD-A8N9-01A-01-TS1-4  
 ```
-    
+      * Make train dataset - put all files from **external_data_splited** to **stage1_train**
 2. Put test dataset into "data/test" folder
 3. Put pretrained coco weights into "src/nn_var/mask_rcnn/coco_model"
 4. Change paths in dirs.py
