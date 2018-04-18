@@ -19,20 +19,23 @@ Training time ~900s per epoch with pre-defined parameters
 
       `git clone https://github.com/snakers4/ds_bowl_2018`
 2. Dataset.
-      2.1 Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data) and put files into your directory like this:
+      * Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data)
+      * Download official external dataset from [this page](https://www.kaggle.com/voglinio/bowl2018-external)
+      * Run **src/utils/ext_data_preprocessing.py** to split external images from 1000x1000 px to 500x500 px
+      * At the end of steps above you shout get similar structure:
 ```
-    ├──data
-    │   ├── stage1_test                 <- A folder with stage1 test data
-    │   ├── stage2_test                 <- A folder with stage2 test data
-    │   └── stage1_train                <- A folder with stage1 train data
-    │        ├─ f8e74d4006dd68c1dbe68df7be905835e00d8ba4916f3b18884509a15fdc0b55
-    │        │    ├──  images
-    │        │    └──  masks
-
+    └─data
+       ├── stage1_test                 <- A folder with stage1 test data
+       ├── stage2_test                 <- A folder with stage2 test data
+       └── stage1_train                <- A folder with stage1 train data
+             ├─ 00ae65c1c6631ae6f2be1a449902976e6eb8483bf6b0740d00530220832c6d3e
+             │    ├──  images
+             │    └──  masks
         ...
+      
+             └─ ff3407842ada5bc18be79ae453e5bdaa1b68afc842fc22fa618ac6e6599d0bb3
+    
         
-
-    └────────└─ ff599c7301daa1f783924ac8cbe3ce7b42878f15a39c2d19659189951f540f48
 ```
     
 2. Put test dataset into "data/test" folder
