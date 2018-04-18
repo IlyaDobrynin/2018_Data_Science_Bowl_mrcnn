@@ -1,5 +1,5 @@
 # Credits
-* Mask-RCNN implementation based on the brilliant [Matterport code](https://github.com/matterport/Mask_RCNN)
+* Mask-RCNN implementation based on the brilliant [Matterport](https://github.com/matterport/Mask_RCNN) code
 * RLE encoding based on the best [rakhlin fast run length encoding](https://www.kaggle.com/rakhlin/fast-run-length-encoding-python)
 * Code for metric estimation - [William Cukierski kernel](https://www.kaggle.com/wcukierski/example-metric-implementation)
 
