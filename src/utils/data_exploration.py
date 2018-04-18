@@ -4,9 +4,8 @@ import skimage.io
 import matplotlib.pyplot as plt
 import random
 
-from dirs import ROOT_DIR, TRAIN_DATASET_DIR, TEST_DATASET_DIR
+from dirs import ROOT_DIR, TRAIN_DATASET_DIR, TEST_DATASET_DIR, EXTERNAL_DATA
 
-EXTERNAL_DATA = ""
 
 def get_id():
     """
@@ -50,8 +49,8 @@ def read_image_labels(data_path, image_id, img_type):
             labels[masks[index] > 0] = index + 1
         return image, labels
     elif img_type == 'ext':
-        image_file = os.path.join(ROOT_DIR, r'data/external/extra_data/{}/images/{}.tif'.format(image_id,image_id))
-        mask_file = os.path.join(ROOT_DIR, r'data/external/extra_data/{}/masks/*.png'.format(image_id))
+        image_file = os.path.join(data_path, r'{}/images/{}.tif'.format(image_id,image_id))
+        mask_file = os.path.join(data_path, r'{}/masks/*.png'.format(image_id))
         image = skimage.io.imread(image_file)
         masks = skimage.io.imread_collection(mask_file).concatenate()
         height, width, _ = image.shape
@@ -101,57 +100,65 @@ def read_image(images_path, image_id):
     return skimage.io.imread(os.path.join(ROOT_DIR, images_path, image_id, r'{}.png'.format(image_id)))
 
 
-if __name__ == '__main__':
-
-    paths = [
-             # r'data/external/extra_data',
-             # r'out_files/images/postproc/remove_small_obj/cell20180411T1546-060_ep-45_pep',
-             # r'out_files/images/postproc_val/remove_small_obj/cell20180411T1546-060_ep-45_pep',
-             r'out_files/images/postproc/remove_small_obj/cell20180411T1546-060_ep-45_pep',
-             r'out_files/images/postproc/remove_small_obj/cell20180412T2356-080_ep-60_pep',
-             # r'out_files/images/postproc_val/remove_small_obj/cell20180412T2356-080_ep-79_pep',
-             # r'out_files/images/postproc_val/remove_small_obj/cell20180412T2356-080_ep-46_pep',
-             # r'out_files/images/postproc/remove_small_obj/mrcnn-coco-heads4+-3020-ie-0.2-28_pep',
-             # r'out_files/images/postproc/remove_small_obj/mrcnn-coco-heads4+-3020-ie-0.2-last_pep',
-             # r'out_files/images/postproc/remove_small_obj/mrcnn-50_ep-0.2_vs-path_iw-heads_l-24_pep',
-             # r'out_files/images/postproc_val/remove_small_obj/mrcnn-90_ep-0.2_vs-coco_iw-all_l-38_pep'
-             # r'out_files/images/postproc/remove_small_obj/mrcnn-35_ep-0.2_vs-coco_iw-heads_l-18_pep',
-             # r'out_files/images/predict/mrcnn-25_ep-0.2_vs-coco_iw-heads_l-10_pep',
-             # r'out_files/images/postproc/remove_holes_objects/mrcnn-32_ep-0.2_vs-imagenet_iw-heads_l-12_pep',
-             # r'out_files/images/postproc/remove_holes_objects/mrcnn-32_ep-0.2_vs-imagenet_iw-heads_l-12_pep'
-             ]
-
-    img_type = 'test'
+def show_images(paths, img_type, img_to_show=1, images_ids_list=None, random_mode=True):
     rand = random.randint(0, 85)
-    print(rand)
     for n, preds_path in enumerate(paths):
         np.random.seed(rand)
         image_ids = next(os.walk(os.path.join(ROOT_DIR, preds_path)))[1]
-        random_images = ['c43e356beedae15fec60ae3f8b06ea8e9036081951deb7e44f481b15b3acfc37'] # np.random.choice(image_ids, 1)
-        print(random_images)
-        for i, image_id in enumerate(random_images):
+        if random_mode and not images_ids_list:
+            images = np.random.choice(image_ids, img_to_show)
+        else:
+            if images_ids_list:
+                images = images_ids_list
+            else:
+                print("No images to show.\n You can provide images_ids_list parameter, or set random mode=True")
+                break
+
+        print("Images list:\n", images)
+
+        for i, image_id in enumerate(images):
             if img_type == 'test':
                 image = read_image_labels(data_path=TEST_DATASET_DIR, image_id=image_id, img_type=img_type)
                 labels = read_labels(preds_path, image_id)
                 fig = plt.figure(n + 1, figsize=(15, 15))
-                ax = fig.add_subplot(2, len(random_images), i * 2 + 1)
+                ax = fig.add_subplot(2, len(images), (i + 1))
                 ax.imshow(labels)
-                ay = fig.add_subplot(2, len(random_images), i * 2 + 2)
+                ay = fig.add_subplot(2, len(images), (i + 1) + len(images))
                 ay.imshow(image)
                 fig.suptitle(preds_path + '\n{}'.format(image_id))
             else:
                 image, labels = read_image_labels(data_path=TRAIN_DATASET_DIR, image_id=image_id, img_type=img_type)
                 label = read_labels(preds_path, image_id)
                 fig = plt.figure(n + 1, figsize=(15, 15))
-                ax = fig.add_subplot(3, len(random_images), i * 2 + 1)
+                ax = fig.add_subplot(3, len(images), (i + 1))
                 ax.imshow(image)
-                ax = fig.add_subplot(3, len(random_images), i * 2 + 2)
+                ax = fig.add_subplot(3, len(images), (i + 1) + len(images))
                 ax.imshow(labels)
-                ay = fig.add_subplot(3, len(random_images), i * 2 + 3)
+                ay = fig.add_subplot(3, len(images), (i + 1) + 2 * len(images))
                 ay.imshow(label)
                 fig.suptitle(preds_path + '\n{}'.format(image_id))
 
     mng = plt.get_current_fig_manager()
     mng.window.showMaximized()
     plt.show()
+
+
+if __name__ == '__main__':
+
+    paths = [
+             r'out_files/images/predict/cell20180411T1546-060_ep-45_pep',
+             r'out_files/images/predict/cell20180412T2356-080_ep-60_pep',
+             # r'out_files/images/postproc/remove_small_obj/cell20180411T1546-060_ep-45_pep',
+             # r'out_files/images/postproc/remove_small_obj/cell20180412T2356-080_ep-60_pep',
+             ]
+
+    images_ids_list = ['a479b10e9b12970b86bd7f9aef6b1224bd0fc49d39b598bd0c2a67aebff74cec',
+                       '4c9f76aa783818aa1c3506820b995391afb06a36fd034de44311364e6e161bc0']
+    img_type = 'test'
+
+    show_images(paths=paths,
+                img_type=img_type,
+                images_ids_list=images_ids_list,
+                img_to_show=2)
+
 
