@@ -18,7 +18,8 @@ Training time ~900s per epoch with pre-defined parameters
 1. Clone this repo:
 
       `git clone https://github.com/snakers4/ds_bowl_2018`
-2. Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data) and put files into your directory like this:
+2. Dataset.
+      2.1 Download dataset from [official page](https://www.kaggle.com/c/data-science-bowl-2018/data) and put files into your directory like this:
 ```
     ├──data
     │   ├── stage1_test                 <- A folder with stage1 test data
