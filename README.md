@@ -20,11 +20,11 @@ Training time ~900s per epoch with pre-defined parameters
 
 # 2 Preparing the data
 ## 2.1 Datasets
-1. Download dataset from [**official page**](https://www.kaggle.com/c/data-science-bowl-2018/data) and official external dataset from [**this page**](https://www.kaggle.com/voglinio/bowl2018-external)and put it in your dataset root directory
+1. Download dataset from [**official page**](https://www.kaggle.com/c/data-science-bowl-2018/data) and official external dataset from [**this page**](https://www.kaggle.com/voglinio/bowl2018-external) and put it in your dataset root directory
 2. Change path in **dirs.py** to your external dataset folder:
 ```
-DATASET_DIR = Your dataset root directory
-EXTERNAL_DATA = os.path.join(DATASET_DIR, Name of the external data folder)
+      DATASET_DIR = Your dataset root directory
+      EXTERNAL_DATA = os.path.join(DATASET_DIR, Name of the external data folder)
 ```
 4. Run **src/utils/ext_data_preprocessing.py** (`out_path = Name of the out folder`) to split external images from 1000x1000 px to 500x500 px.
 5. Make train dataset - put all files from **external_data_splited** to **train**.
