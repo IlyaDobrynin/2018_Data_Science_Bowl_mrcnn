@@ -1,8 +1,7 @@
 import os
-import numpy as np # linear algebra
+import numpy as np
 from skimage.io import *
-from collections import Counter
-from dirs import ROOT_DIR, make_dir
+from dirs import ROOT_DIR, DATASET_DIR, EXTERNAL_DATA, make_dir
 import matplotlib.pyplot as plt
 from src.utils import data_exploration as de
 import warnings
@@ -57,8 +56,10 @@ def save_data(image, labels, image_id=None, out_path=None):
 
     for f in range(0, fold):
         split_image_id = "%s-%s" % (image_id, f+1)
-        out_images_dir = make_dir(os.path.join(out_path, r'{}/images'.format(split_image_id)))
-        out_masks_dir = make_dir(os.path.join(out_path, r'{}/masks'.format(split_image_id)))
+        out_images_dir = make_dir(os.path.join(out_path, r'{}/images'.format(split_image_id)),
+                                  top_dir=DATASET_DIR)
+        out_masks_dir = make_dir(os.path.join(out_path, r'{}/masks'.format(split_image_id)),
+                                 top_dir=DATASET_DIR)
         imsave(os.path.join(out_images_dir, r'{}.png'.format(split_image_id)), image[f, :, :])
         for l in range(0, labels.shape[1]):
             label = labels[f, l, :, :]
@@ -98,12 +99,15 @@ def check_split(path):
 
 if __name__ == '__main__':
     external_ids = de.get_external_ids()
-    out_path = r'data/external/extra_data_splited'
+    out_path = 'extra_data_splited'
 
-    # for ext_id in tqdm(external_ids, total=len(external_ids)):
-    #     image, masks, _ = de.read_image_labels(image_id=ext_id, img_type='ext')
-    #     output_image, output_labels = split_image_labels(image, masks)
-    #     save_data(image=output_image, labels=output_labels, image_id=ext_id, out_path=out_path)
-    path = os.path.join(ROOT_DIR, r'data/internal_external/train')
-    check_split(path=path)
+    for ext_id in tqdm(external_ids, total=len(external_ids)):
+        image, masks, _ = de.read_image_labels(data_path=EXTERNAL_DATA,
+                                               image_id=ext_id,
+                                               img_type='ext')
+        output_image, output_labels = split_image_labels(image, masks)
+        save_data(image=output_image, labels=output_labels, image_id=ext_id, out_path=out_path)
+
+    # Check if the data vere split well
+    # check_split(path=out_path)
 

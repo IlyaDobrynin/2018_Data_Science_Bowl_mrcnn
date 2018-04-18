@@ -2,12 +2,15 @@ import os
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Dataset folder
-TRAIN_DATASET_DIR = r'C:/Programming/nuclei/data/train'  # Change for your path
-TEST_DATASET_DIR = r'C:/Programming/nuclei/data/test'  # Change for your path
+# Dataset folders
+DATASET_DIR = r'C:/Programming/nuclei/data'              # Change for your path
+
+TRAIN_DATASET_DIR = os.path.join(DATASET_DIR, 'train')
+TEST_DATASET_DIR = os.path.join(DATASET_DIR, 'test')
+EXTERNAL_DATA = os.path.join(DATASET_DIR, 'extra_data')
 
 # Path to save files
-OUT_FILES = ROOT_DIR # r'C:/Programming/nuclei'  # os.path.join(ROOT_DIR, r"out_files")  # Change for your files
+OUT_FILES = ROOT_DIR                                      # Change for your path
 
 # Path to model weights
 MODEL_DIR = os.path.join(ROOT_DIR, r'weights')
@@ -16,9 +19,8 @@ MODEL_DIR = os.path.join(ROOT_DIR, r'weights')
 COCO_MODEL_PATH = os.path.join(ROOT_DIR, r'src/nn_var/mask_rcnn/coco_model/mask_rcnn_coco.h5')
 
 
-def make_dir(relative_path):
+def make_dir(relative_path, top_dir=ROOT_DIR):
     dirs = relative_path.replace("\\", "/").split('/')
-    top_dir = ROOT_DIR
     for dir in dirs:
         top_dir = os.path.join(top_dir, dir)
         if not os.path.exists(top_dir):
