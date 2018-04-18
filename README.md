@@ -24,16 +24,33 @@ Training time ~900s per epoch with pre-defined parameters
       * Run **src/utils/ext_data_preprocessing.py** to split external images from 1000x1000 px to 500x500 px
       * At the end of steps above you shout get similar structure:
 ```
-    └─data
-       ├── stage1_test                 <- A folder with stage1 test data
-       ├── stage2_test                 <- A folder with stage2 test data
-       └── stage1_train                <- A folder with stage1 train data
-             ├─ 00ae65c1c6631ae6f2be1a449902976e6eb8483bf6b0740d00530220832c6d3e
-             │    ├──  images
-             │    └──  masks
-        ...
-      
-             └─ ff3407842ada5bc18be79ae453e5bdaa1b68afc842fc22fa618ac6e6599d0bb3
+    └─ data
+         ├── stage1_test                 <- A folder with stage1 test data
+         ├── stage2_test                 <- A folder with stage2 test data
+         ├── stage1_train                <- A folder with stage1 train data
+         │     ├─ 00ae65c1c6631ae6f2be1a449902976e6eb8483bf6b0740d00530220832c6d3e
+         │     │    ├──  images
+         │     │    └──  masks
+         │     .
+         │     .
+         │     .
+         │     └─ ff3407842ada5bc18be79ae453e5bdaa1b68afc842fc22fa618ac6e6599d0bb3
+         ├── external_data
+         │     ├─ TCGA-18-5592-01Z-00-DX1
+         │     │   ├──  images
+         │     │   └──  masks
+         │     .
+         │     .
+         │     .
+         │     └─ TCGA-RD-A8N9-01A-01-TS1
+         └── external_data_splited
+               ├─ TCGA-18-5592-01Z-00-DX1-1
+               │   ├──  images
+               │   └──  masks
+               .
+               .
+               .
+               └─ TCGA-RD-A8N9-01A-01-TS1-4
     
         
 ```
