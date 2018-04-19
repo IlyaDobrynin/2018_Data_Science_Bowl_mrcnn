@@ -3,7 +3,7 @@ import numpy as np
 import skimage.io
 import matplotlib.pyplot as plt
 import random
-from dirs import ROOT_DIR, TRAIN_DATASET_DIR, TEST_DATASET_DIR, EXTERNAL_DATA
+from dirs import *
 
 
 def get_id():
@@ -65,7 +65,7 @@ def read_image_labels(data_path, image_id, img_type):
 
 
 def read_labels(preds_path, image_id):
-    mask_file = os.path.join(ROOT_DIR, r'{}\{}\*.png'.format(preds_path, image_id))
+    mask_file = os.path.join(ROOT_DIR, r'{}/{}/*.png'.format(preds_path, image_id))
     masks = skimage.io.imread_collection(mask_file).concatenate()
     _, height, width = masks.shape
     num_masks = masks.shape[0]
