@@ -8,6 +8,12 @@ from dirs import ROOT_DIR, make_dir
 from src.utils.data_exploration import get_id
 
 
+if os.name is 'nt':
+    dir_splitter = '\\'
+else:
+    dir_splitter = '/'
+
+
 def preds_test(test_ids, predict_files_path):
     preds_test_images = []
     for i, ids in tqdm(enumerate(test_ids), total=len(test_ids)):
@@ -78,7 +84,7 @@ if __name__ == '__main__':
     print('-' * 30 + ' Creating submit file... ' + '-' * 30)
     images_to_encode = os.path.join(ROOT_DIR,
                                     r'out_files/images/postproc/remove_small_obj/mrcnn-60_ep-0.2_vs-coco_iw-heads_l-24_pep')
-    model_name = images_to_encode.replace("\\", "/").split("/")[-1]
+    model_name = images_to_encode.replace(dir_splitter, "/").split("/")[-1]
     submit_path = make_dir('sub/{}'.format(model_name))
     create_submit(files_path=images_to_encode, model_name=model_name, submit_path=submit_path)
 

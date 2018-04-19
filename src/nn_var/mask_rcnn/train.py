@@ -19,6 +19,10 @@ np.random.seed(17)
 if not os.path.exists(COCO_MODEL_PATH):
     utils.download_trained_weights(COCO_MODEL_PATH)
 
+if os.name is 'nt':
+    dir_splitter = '\\'
+else:
+    dir_splitter = '/'
 
 def get_model_name(model, params):
     """
@@ -36,21 +40,22 @@ def get_model_name(model, params):
     # Create model name
 
     if params['epoch_for_predict'].isdigit():
-        model_path = model.find_last()[1].split('\\')
+        model_path = model.find_last()[1].split(dir_splitter)
         time = model_path[-2]
         fact_epohs = model_path[-1][-6:-3]
         pred_epoch = params['epoch_for_predict']
 
     elif params['epoch_for_predict'] == 'last':
-        model_path = model.find_last()[1].split('\\')
+        model_path = model.find_last()[0].split(dir_splitter)
+        print(model_path)
         time = model_path[-2]
         fact_epohs = model_path[-1][-6:-3]
         pred_epoch = fact_epohs[1:]
 
     else:
-        time = params['path_to_weights_for_predict'].split('/')[-2]
-        pred_epoch = params['path_to_weights_for_predict'].split('/')[-1][-5:-3]
-        fact_epohs =  params['path_to_weights_for_predict'].split('/')[-1][-5:-4]
+        time = params['path_to_weights_for_predict'].replace(dir_splitter, "/").split('/')[-2]
+        pred_epoch = params['path_to_weights_for_predict'].replace(dir_splitter, "/").split('/')[-1][-5:-3]
+        fact_epohs =  params['path_to_weights_for_predict'].replace(dir_splitter, "/").split('/')[-1][-5:-4]
 
     name = time + '-' \
                  + "{}_ep-".format(fact_epohs) \
@@ -143,6 +148,7 @@ def predict(model, config, params, model_name, images_ids):
     elif params['epoch_for_predict'] == 'path':
         model_path = os.path.join(ROOT_DIR, params['path_to_weights_for_predict'])
     assert model_path != "", "Provide path to trained weights"
+    model_path = model_path.replace(dir_splitter, "/")
     print("Loading weights from ", model_path)
     model.load_weights(model_path, by_name=True)
 
@@ -154,12 +160,12 @@ def predict(model, config, params, model_name, images_ids):
     images_dir = ""
     if predict_type == 'test':
         # Create folder for predicted files
-        relative_preds_path = r'out_files\images\predict\{}'.format(model_name)
+        relative_preds_path = r'out_files/images/predict/{}'.format(model_name)
         pred_files_dir = make_dir(relative_preds_path)
         images_dir = TEST_DATASET_DIR
     elif predict_type == 'val':
         # Create folder for predicted files
-        relative_preds_path = r'out_files\images\predict_val\{}'.format(model_name)
+        relative_preds_path = r'out_files/images/predict_val/{}'.format(model_name)
         pred_files_dir = make_dir(relative_preds_path)
         images_dir = TRAIN_DATASET_DIR
     assert pred_files_dir != "", "Provide path to predict files"
@@ -176,7 +182,7 @@ def predict(model, config, params, model_name, images_ids):
             os.mkdir(image_dir)
 
         # Read test image
-        test_image = skimage.io.imread(os.path.join(images_dir, r'{}\images\{}.png'.format(image_id, image_id)))
+        test_image = skimage.io.imread(os.path.join(images_dir, r'{}/images/{}.png'.format(image_id, image_id)))
         # If grayscale. Convert to RGB for consistency.
         if test_image.ndim != 3:
             test_image = skimage.color.gray2rgb(test_image)
@@ -191,7 +197,7 @@ def predict(model, config, params, model_name, images_ids):
                 import warnings
                 warnings.filterwarnings("ignore")
                 r['masks'].astype(np.int32)[:, :, i] *= 255
-                skimage.io.imsave('{}\{}.png'.format(image_dir, i), r['masks'][:, :, i])
+                skimage.io.imsave('{}/{}.png'.format(image_dir, i), r['masks'][:, :, i])
         else:
             pred_image = np.zeros((test_image.shape[0], test_image.shape[1]), dtype=np.int32)
             skimage.io.imsave('{}/0.png'.format(image_dir), pred_image)
@@ -225,7 +231,7 @@ def validate(model, config, params, model_name, val_ids):
     # Validation data postprocessing
     print('\nStep 2 of 3: Validation data postprocessing... ')
     postproc_out_dir = r'out_files/images/postproc_val'
-    postproc_model_name = predict_images_dir.replace("\\", "/").split("/")[-1]
+    postproc_model_name = predict_images_dir.replace(dir_splitter, "/").split("/")[-1]
     predict_images_ids = next(os.walk(os.path.join(OUT_FILES, predict_images_dir)))[1]
     for image_id in tqdm(predict_images_ids, total=len(predict_images_ids)):
         labels = dpost.read_labels(predict_images_dir, image_id)
@@ -279,7 +285,7 @@ def submit_predict(model, config, params, model_name, val_score, test_ids):
     # Data postprocessing
     print('\nStep 2 of 3: Test data postprocessing... ')
     postproc_out_dir = r'out_files/images/postproc'
-    postproc_model_name = predict_images_dir.replace("\\", "/").split("/")[-1]
+    postproc_model_name = predict_images_dir.replace(dir_splitter, "/").split("/")[-1]
     predict_images_ids = next(os.walk(os.path.join(OUT_FILES, predict_images_dir)))[1]
     for image_id in tqdm(predict_images_ids, total=len(predict_images_ids)):
         labels = dpost.read_labels(predict_images_dir, image_id)
@@ -319,7 +325,7 @@ if __name__ == '__main__':
         'val_split': 0.1,
 
         # VALIDATION/PREDICT PARAMETERS
-        'epoch_for_predict': '77',  # int, "last" or "path". If "path" is chosen,
+        'epoch_for_predict': 'last',  # int, "last" or "path". If "path" is chosen,
                                       # get the path from 'path_to_weights_for_predict'.
         'path_to_weights_for_predict': r'weights/cell20180411T1546/mask_rcnn_cell_0045.h5'
     }

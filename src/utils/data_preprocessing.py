@@ -8,6 +8,11 @@ from tqdm import tqdm
 from skimage.io import imread, imshow, imread_collection, concatenate_images
 from skimage.transform import resize
 
+if os.name is 'nt':
+    dir_splitter = '\\'
+else:
+    dir_splitter = '/'
+
 # Set some parameters
 IMG_WIDTH = 256
 IMG_HEIGHT = 256

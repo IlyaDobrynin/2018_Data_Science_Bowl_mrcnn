@@ -1,6 +1,12 @@
 import os
 import configparser
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+if os.name is 'nt':
+    dir_splitter = '\\'
+else:
+    dir_splitter = '/'
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__)).replace(dir_splitter, "/")
 
 config = configparser.ConfigParser()
 config.read(os.path.join(ROOT_DIR, 'configs.cfg'))
@@ -25,7 +31,7 @@ COCO_MODEL_PATH = os.path.join(ROOT_DIR, r'src/nn_var/mask_rcnn/coco_model/mask_
 
 
 def make_dir(relative_path, top_dir=ROOT_DIR):
-    dirs = relative_path.replace("\\", "/").split('/')
+    dirs = relative_path.replace(dir_splitter, "/").split('/')
     for d in dirs:
         top_dir = os.path.join(top_dir, d)
         if not os.path.exists(top_dir):

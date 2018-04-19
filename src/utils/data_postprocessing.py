@@ -8,6 +8,11 @@ from src.utils import data_exploration as de
 from tqdm import tqdm
 import warnings
 
+if os.name is 'nt':
+    dir_splitter = '\\'
+else:
+    dir_splitter = '/'
+
 
 def read_labels(labels_dir, label_id):
     """
@@ -96,7 +101,7 @@ def sum_masks(images_dir, image_id):
     warnings.filterwarnings("ignore")
     # Make output directories
     image_dir = os.path.join(ROOT_DIR, r'{}/{}'.format(images_dir, image_id))
-    model_name = images_dir.replace("\\", "/").split("/")[-1]
+    model_name = images_dir.replace(dir_splitter, "/").split("/")[-1]
     out_dir = r'out_files/images/postproc/sum_masks/{}/{}'.format(model_name, image_id)
     make_dir(out_dir)
     image_ids = next(os.walk(image_dir))[2]
@@ -131,7 +136,7 @@ if __name__ == "__main__":
         out_dir = ''
         print("Set mode in 'test' or 'val'")
 
-    model_name = directory.replace("\\", "/").split("/")[-1]
+    model_name = directory.replace(dir_splitter, "/").split("/")[-1]
 
     for image_id in tqdm(image_ids, total=len(image_ids)):
         labels = read_labels(directory, image_id)
@@ -140,7 +145,6 @@ if __name__ == "__main__":
         overlap_fix_labels = overlapping_fix(labels=removed_instances_labels)
         save_labels(labels=overlap_fix_labels,
                     out_dir=out_dir,
-                    process_type='remove_small_obj',
                     model_name=model_name,
                     image_id=image_id)
 
