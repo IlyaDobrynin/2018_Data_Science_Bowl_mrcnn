@@ -1,15 +1,20 @@
 import os
-
+import configparser
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
+config = configparser.ConfigParser()
+config.read(os.path.join(ROOT_DIR, 'configs.ini'))
+
 # Dataset folders
-DATASET_DIR = r'C:/Programming/nuclei/data'                 # Change to your path
-train_folder = 'train'                                      # Change to the name of your train data folder
-test_folder = 'test'                                        # Change to the name of your test data folder
-extra_data_folder = 'extra_data'                            # Change to the name of your extra data folder
+DATASET_DIR       = config['DIRS']['dataset_dir']
+train_folder      = config['DIRS']['train_folder']
+test_folder       = config['DIRS']['test_folder']
+extra_data_folder = config['DIRS']['extra_data_folder']
+
+
 
 # Path to save files
-OUT_FILES = ROOT_DIR                                        # Change to your path
+OUT_FILES = ROOT_DIR
 
 TRAIN_DATASET_DIR = os.path.join(DATASET_DIR, train_folder)
 TEST_DATASET_DIR = os.path.join(DATASET_DIR, test_folder)
