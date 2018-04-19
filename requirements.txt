@@ -7,5 +7,3 @@ imgaug == 0.2.5
 tensorflow-gpu == 1.7.0
 keras == 2.1.5
 scipy == 1.0.1
-
-

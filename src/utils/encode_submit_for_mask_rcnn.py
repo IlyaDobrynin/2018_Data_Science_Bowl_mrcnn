@@ -29,6 +29,20 @@ def rle_encoding(x):
     return run_lengths
 
 
+def rle_decoding(rle_string, height, width):
+    rows, cols = height, width
+    rle_numbers = [int(numstring) for numstring in rle_string.split(' ')]
+    rle_pairs = np.array(rle_numbers).reshape(-1, 2)
+    img = np.zeros(rows*cols, dtype=np.uint8)
+    for index,length in rle_pairs:
+        index -= 1
+        img[index:index+length] = 255
+    img = img.reshape(cols, rows)
+    img = img.T
+
+    return img
+
+
 def prob_to_rles(x, cutoff=0.5):
     lab_img = label(x > cutoff)
     for i in range(1, lab_img.max() + 1):

@@ -2239,10 +2239,10 @@ class MaskRCNN():
                 are considered to be done alreay, so this actually determines
                 the epochs to train in total rather than in this particaular
                 call.
-        layers: Allows selecting wich layers to train. It can be:
+        layers: Allows selecting which layers to train. It can be:
             - A regular expression to match layer names to train
             - One of these predefined values:
-              heaads: The RPN, classifier and mask heads of the network
+              heads: The RPN, classifier and mask heads of the network
               all: All the layers
               3+: Train Resnet stage 3 and up
               4+: Train Resnet stage 4 and up
