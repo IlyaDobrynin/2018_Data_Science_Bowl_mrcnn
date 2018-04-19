@@ -26,7 +26,7 @@ parser.add_argument("-tw", "--train_weights_path",
                     required=False,
                     default=None,
                     metavar="",
-                    help="Path to initial weights to train with")
+                    help="Relative path to initial weights to train with")
 parser.add_argument("-tp", "--training_pipeline",
                     nargs="+",
                     type=training_pipeline,
@@ -51,7 +51,7 @@ parser.add_argument("-pw", "--pred_weights_path",
                     metavar="",
                     default=None,
                     required=False,
-                    help="Path to weights to predict with")
+                    help="Relative path to weights to predict with")
 
 args = parser.parse_args()
 
