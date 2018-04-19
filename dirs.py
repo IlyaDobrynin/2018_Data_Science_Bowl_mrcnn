@@ -6,9 +6,9 @@ config = configparser.ConfigParser()
 config.read(os.path.join(ROOT_DIR, 'configs.cfg'))
 
 # Dataset folders
-DATASET_DIR       = config['DIRS']['dataset_dir']
-train_folder      = config['DIRS']['train_folder']
-test_folder       = config['DIRS']['test_folder']
+DATASET_DIR = config['DIRS']['dataset_dir']
+train_folder = config['DIRS']['train_folder']
+test_folder = config['DIRS']['test_folder']
 extra_data_folder = config['DIRS']['extra_data_folder']
 
 # Path to save files
