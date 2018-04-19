@@ -3,6 +3,7 @@ import argparse
 from src.nn_var.mask_rcnn.train import *
 from dirs import MODEL_DIR
 
+
 def training_pipeline(s):
     try:
         values = s.split(",")

@@ -3,7 +3,6 @@ import numpy as np
 import skimage.io
 import matplotlib.pyplot as plt
 import random
-
 from dirs import ROOT_DIR, TRAIN_DATASET_DIR, TEST_DATASET_DIR, EXTERNAL_DATA
 
 
