@@ -1,6 +1,9 @@
-import os
+import os, sys
 import numpy as np
 from skimage.io import *
+import argparse
+sys.path.append('../..')
+print(sys.path)
 from dirs import ROOT_DIR, DATASET_DIR, EXTERNAL_DATA, make_dir
 import matplotlib.pyplot as plt
 from src.utils import data_exploration as de
@@ -98,9 +101,18 @@ def check_split(path):
 
 
 if __name__ == '__main__':
-    external_ids = de.get_external_ids()
-    out_path = 'extra_data_splited'
+    parser = argparse.ArgumentParser(description='External Ddata preprocessing')
 
+    parser.add_argument("-o", "--out",
+                        default='extra_data_splited',
+                        metavar="",
+                        help="Name of the output folder (default - 'extra_data_splited'")
+
+    args = parser.parse_args()
+    out_path = args.out
+    print(out_path)
+
+    external_ids = de.get_external_ids()
     for ext_id in tqdm(external_ids, total=len(external_ids)):
         image, masks, _ = de.read_image_labels(data_path=EXTERNAL_DATA,
                                                image_id=ext_id,
@@ -109,5 +121,5 @@ if __name__ == '__main__':
         save_data(image=output_image, labels=output_labels, image_id=ext_id, out_path=out_path)
 
     # Check if the data vere split well
-    # check_split(path=out_path)
+    check_split(path=out_path)
 
