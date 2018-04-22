@@ -40,13 +40,13 @@ def get_model_name(model, params):
     # Create model name
 
     if params['epoch_for_predict'].isdigit():
-        model_path = model.find_last()[1].split(dir_splitter)
+        model_path = model.find_last()[1].replace(dir_splitter, "/").split("/")
         time = model_path[-2]
         fact_epohs = model_path[-1][-6:-3]
         pred_epoch = params['epoch_for_predict']
 
     elif params['epoch_for_predict'] == 'last':
-        model_path = model.find_last()[0].split(dir_splitter)
+        model_path = model.find_last()[0].replace(dir_splitter, "/").split("/")
         print(model_path)
         time = model_path[-2]
         fact_epohs = model_path[-1][-6:-3]
@@ -308,7 +308,7 @@ def submit_predict(model, config, params, model_name, val_score, test_ids):
 if __name__ == '__main__':
     # Parameters dictionary
     params = {
-        'mode': 'validate',  # "training", "validate" or "predict"
+        'mode': 'training',  # "training", "validate" or "predict"
         'model_type': 'mrcnn',
 
         # TRAINING PARAMETERS
