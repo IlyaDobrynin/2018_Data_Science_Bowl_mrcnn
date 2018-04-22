@@ -17,7 +17,7 @@ def calculate_image_iou(image_id, true_images_dir, pred_images_dir):
 
     # Make a ground truth array and summary label image
     y_true = np.zeros((num_masks, height, width), np.uint16)
-    y_true[:,:,:] = masks[:,:,:] // 255  # Change ground truth mask to zeros and ones
+    y_true[:, :, :] = masks[:, :, :] // 255  # Change ground truth mask to zeros and ones
 
     pred_mfile = os.path.join(ROOT_DIR, pred_images_dir, r'{}/*'.format(image_id))
     pred_masks = skimage.io.imread_collection(pred_mfile).concatenate()
